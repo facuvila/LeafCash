@@ -4,14 +4,14 @@ const config = require('../config');
 
 async function getAll(){
   const result = await db.query(
-    `SELECT * from Usuario`
+    `SELECT * from userData`
   );
   return result;
 }
 
 async function getByIdyCampo(id, campo){
   const result = await db.query(
-    `SELECT ${campo} from Usuario WHERE userId = "${id}"`
+    `SELECT ${campo} from userData WHERE userId = "${id}"`
   );
   return result;
 }

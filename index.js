@@ -1,12 +1,8 @@
-/*import { registerRootComponent } from 'expo';
+import { registerRootComponent } from 'expo';
 import App from './App';
-registerRootComponent(App);*/
+registerRootComponent(App);
 
-//Aclaración de este commit.
-//Vía la ejecución de index.js, podemos acceder a la base de datos a través de la API y recibir valores de la misma en base al usuario y el campo sobre los cuales consultar.
-//Sin embargo, aún no logro implementar esta consulta a la base de datos como algo automático por parte de la app de react native.
-
-const express = require("express");
+/*const express = require("express");
 const app = express();
 const port = 3000;
 const userDataRouter = require("./controller/userDataController");
@@ -34,4 +30,4 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-});
+});*/
