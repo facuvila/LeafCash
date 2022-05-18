@@ -4,19 +4,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {  BarCodeScanner  } from 'expo-barcode-scanner';
 import { Dimensions } from 'react-native';
-import getBalance from "./getBalance.js";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function HomeScreen({ navigation, route }) {
   React.useEffect(() => {}, [route.params?.post]);
-  let userBalance = getBalance('facuvila');
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>LEAF CASH</Text>
-      <Text>{userBalance}</Text>
-      <Button
+        <Button
         title="ESCANEAR"
         onPress={() => navigation.navigate('Scan')}
       />
@@ -79,7 +76,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   //transferir("facuvila", "santicastro", 100);
   // Return the View
-  return (
+    return (
     <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
