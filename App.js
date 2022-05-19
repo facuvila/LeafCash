@@ -9,7 +9,7 @@ import Confirm from './Screens/Transaction/confirm';
 
 function HomeScreen({ route }) {
   React.useEffect(() => {}, [route.params?.post]);
-  return (
+    return (
     <Home result={route.params?.post}/>
   );
 }

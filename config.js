@@ -1,10 +1,10 @@
 const config = {
     db: {
-        host: "34.176.220.17",
-        database: 's14_userData',
-        user: "u14_uraglajxr0",
-        password: "A1gQgdtLW.4EmljuueY+k69B"
+        host: process.env.HOST,
+        database: process.env.DATABASE,
+        user: process.env.USER,
+        password: process.env.PASSWORD
     },
-  };
+};
 
 module.exports = config;

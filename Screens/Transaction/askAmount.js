@@ -7,7 +7,7 @@ function Amount({ target }) {
     const [amount, setAmount] = useState('');
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>TRANSFERIENDO A: {target}</Text>
+            <Text>TRANSFIRIENDO A: {target}</Text>
             <TextInput
                 editable
                 maxLength={40}
