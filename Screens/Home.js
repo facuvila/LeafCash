@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import userName from '../loggedUser';
 const axios = require('axios');
 
 function Home({ result }) {
     const [isLoading, setLoading] = useState(true);
     const [balance, setBalance] = useState([]);
     const navigation = useNavigation();
-    const loggedUser = 'facuvila';    
-
-    axios.get('https://leafcash.herokuapp.com/getUserData', { params: { id: loggedUser, campo:'balance' } })
+    axios.get('https://leafcash.herokuapp.com/getUserData', { params: { id: userName, campo:'balance' } })
     .then(function (resp) {
         setBalance(resp.data[0].balance);
         setLoading(false);
