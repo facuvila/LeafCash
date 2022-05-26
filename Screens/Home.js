@@ -1,24 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import userName from '../loggedUser';
+import { getBalance } from '../apiCalls';
+import loggedUser from '../loggedUser';
+
 const axios = require('axios');
 
 function Home({ result }) {
-    const [isLoading, setLoading] = useState(true);
-    const [balance, setBalance] = useState([]);
     const navigation = useNavigation();
-    axios.get('https://leafcash.herokuapp.com/getUserData', { params: { id: userName, campo:'balance' } })
-    .then(function (resp) {
-        setBalance(resp.data[0].balance);
-        setLoading(false);
-    });
-    
+    //console.log(loggedUser.userName);
+    /*let balance = null;
+    balance = getBalance();*/
+
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            {isLoading ? <Text>Loading...</Text> : 
+            {false ? <Text>Loading...</Text> : 
                 <>
-                <Text>LEAF CASH</Text><Text>${balance}</Text>
+                <Text>LEAF CASH</Text><Text>${loggedUser}</Text>
                 <Button
                     title="ENVIAR"
                     onPress={() => navigation.navigate('Target')} />
@@ -32,3 +30,7 @@ function Home({ result }) {
 };
 
 export default Home;
+
+//COMMIT NO FUNCIONAL
+//COMMIT NO FUNCIONAL
+//COMMIT NO FUNCIONAL

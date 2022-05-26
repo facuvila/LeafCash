@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import userName from '../../loggedUser';
-const axios = require('axios');
+import { transfer } from '../../apiCalls';
 
 function Confirm({ target, amount }) {
     const navigation = useNavigation();
@@ -12,13 +11,7 @@ function Confirm({ target, amount }) {
             <TouchableOpacity
                onPress = {
                     () => {
-                        axios.post(`https://leafcash.herokuapp.com/transaction`, null, 
-                            { params: {
-                                idOrigen: userName, 
-                                idDestino: target,
-                                monto: amount
-                            }}
-                        )
+                        transfer(target, amount);
                         navigation.navigate({ name: 'Home' })
                     }
                }>
