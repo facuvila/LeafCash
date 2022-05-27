@@ -6,7 +6,7 @@ import Home from './Screens/Home';
 import Target from './Screens/Transaction/askTarget';
 import Amount from './Screens/Transaction/askAmount';
 import Confirm from './Screens/Transaction/confirm';
-import { createLoggedUser } from './loggedUser';
+import { updateLoggedUserData } from './loggedUser';
 
 function HomeScreen({ route }) {
   React.useEffect(() => {}, [route.params?.post]);
@@ -44,7 +44,6 @@ function ConfirmScreen({ route }) {
 const Stack = createNativeStackNavigator();
 
 function App() {
-    createLoggedUser("facuvila");
     return (
     <NavigationContainer>
     <Stack.Navigator>

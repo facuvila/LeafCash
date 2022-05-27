@@ -1,22 +1,21 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getBalance } from '../apiCalls';
-import loggedUser from '../loggedUser';
+import { updateLoggedUserData } from '../loggedUser';
 
 const axios = require('axios');
 
 function Home({ result }) {
-    const navigation = useNavigation();
-    //console.log(loggedUser.userName);
-    /*let balance = null;
-    balance = getBalance();*/
+    const [userData, setUserData] = useState([]);
+    setUserData(updateLoggedUserData(1));
 
+    const navigation = useNavigation();
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             {false ? <Text>Loading...</Text> : 
                 <>
-                <Text>LEAF CASH</Text><Text>${loggedUser}</Text>
+                <Text></Text>
+                <Text>LEAF CASH</Text><Text>$</Text>
                 <Button
                     title="ENVIAR"
                     onPress={() => navigation.navigate('Target')} />
