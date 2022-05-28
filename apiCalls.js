@@ -6,8 +6,9 @@ export function getUserData(id) {
 
     axios.get('https://leafcash.herokuapp.com/getUserData', { params: { id: id } })
     .then(function (resp) {
-        setUserData(resp.data[0]);
+        setUserData(resp.data);
     });
+    
 
     return userData;
 }
@@ -15,7 +16,7 @@ export function getUserData(id) {
 export function transfer(target, amount) {
     axios.post(`https://leafcash.herokuapp.com/transaction`, null, 
         { params: {
-            idOrigen: userName, 
+            idOrigen: 1, 
             idDestino: target,
             monto: amount
         }}
