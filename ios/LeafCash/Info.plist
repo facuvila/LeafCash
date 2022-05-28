@@ -52,4 +52,8 @@
   <key>UIStatusBarStyle</key>
   <string>UIStatusBarStyleDefault</string>
 </dict>
+<dict>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+</dict>
 </plist>
