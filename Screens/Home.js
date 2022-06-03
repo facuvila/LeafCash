@@ -1,17 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getUserData } from '../apiCalls';
-
-const axios = require('axios');
+import { initializeApp } from 'firebase/app'
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { firebaseConfig } from '../firebase-config';
+import { async } from '@firebase/util';
 
 function Home({ result }) {
+    const [balance, setBalance] = useState();
     const navigation = useNavigation();
+    initializeApp(firebaseConfig);
+    const db = getFirestore();
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            (async () => {
+                const docRef = doc(db, "users", user.uid);
+                const docSnap = await getDoc(docRef);
+                setBalance(docSnap.data().account.balance);
+            })();
+        }
+    });
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             {false ? <Text>Loading...</Text> : 
                 <>
-                <Text>loco</Text>
+                <Text>${balance}</Text>
                 <Text>LEAF CASH</Text><Text></Text>
                 <Button
                     title="ENVIAR"

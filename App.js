@@ -4,6 +4,7 @@ import { Text, StyleSheet, View, TouchableOpacity, TextInput, Alert, Image } fro
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebase-config';
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -102,15 +103,27 @@ function SignupScreen() {
     const navigation = useNavigation();
 
     const app = initializeApp(firebaseConfig);
+    const db = getFirestore();
     const auth = getAuth(app);
 
     const handleCreateAccount = () => {
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((data) => {
+            const userUid = data.user.uid;
+            const email = data.user.email;
+            const account = {
+              email: email,
+              balance: 0, //IMPORTANTE cambiar esto al lado del servidor.
+              plantedTrees: 0,
+              contacts: [],
+              isVendor: false
+            }
+            console.log(account);
+            setDoc(doc(db, "users", userUid), {account});
             navigation.navigate('Home');
         })
         .catch(error => {
-            console.log(error)
+            console.log(error.message);
             Alert.alert(error.message)
         })
     }

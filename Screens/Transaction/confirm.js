@@ -11,7 +11,7 @@ function Confirm({ target, amount }) {
             <TouchableOpacity
                onPress = {
                     () => {
-                        transfer(target, amount);
+                        //transfer(target, amount);
                         navigation.navigate({ name: 'Home' })
                     }
                }>
