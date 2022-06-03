@@ -5,10 +5,10 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { firebaseConfig } from '../firebase-config';
-import { async } from '@firebase/util';
 
 function Home({ result }) {
     const [balance, setBalance] = useState();
+    const [plantedTrees, setPlantedTrees] = useState();
     const navigation = useNavigation();
     initializeApp(firebaseConfig);
     const db = getFirestore();
@@ -20,15 +20,17 @@ function Home({ result }) {
                 const docRef = doc(db, "users", user.uid);
                 const docSnap = await getDoc(docRef);
                 setBalance(docSnap.data().account.balance);
+                setPlantedTrees(docSnap.data().account.plantedTrees);
             })();
         }
     });
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            {false ? <Text>Loading...</Text> : 
+            {balance == null ? <Text>CARGANDO LEAF...</Text> : 
                 <>
+                <Text>LEAF CASH</Text>
                 <Text>${balance}</Text>
-                <Text>LEAF CASH</Text><Text></Text>
+                <Text>Árboles plantados: {plantedTrees}</Text><Text></Text>
                 <Button
                     title="ENVIAR"
                     onPress={() => navigation.navigate('Target')} />
