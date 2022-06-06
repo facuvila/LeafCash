@@ -109,17 +109,13 @@ function SignupScreen() {
     const handleCreateAccount = () => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((data) => {
-            const userUid = data.user.uid;
-            const email = data.user.email;
-            const account = {
-              email: email,
-              balance: 0, //IMPORTANTE cambiar esto al lado del servidor.
+            setDoc(doc(db, "users", data.user.uid), { //IMPORTANTE cambiar construccion de usuario al lado del servidor.
+              email: data.user.email,
+              balance: 100, 
               plantedTrees: 0,
               contacts: [],
               isVendor: false
-            }
-            console.log(account);
-            setDoc(doc(db, "users", userUid), {account});
+            });
             navigation.navigate('Home');
         })
         .catch(error => {
@@ -158,16 +154,17 @@ function SignupScreen() {
 const Stack = createNativeStackNavigator();
   
 export default function App() {
+
   return (
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Signup" component={SignupScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Scan" component={ScanScreen} />
-          <Stack.Screen name="Target" component={AskTargetScreen} />
-          <Stack.Screen name="Amount" component={AskAmountScreen} />
-          <Stack.Screen name="Confirm" component={ConfirmScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Scan" component={ScanScreen} />
+            <Stack.Screen name="Target" component={AskTargetScreen} />
+            <Stack.Screen name="Amount" component={AskAmountScreen} />
+            <Stack.Screen name="Confirm" component={ConfirmScreen} />
         </Stack.Navigator>
       </NavigationContainer>
   );
