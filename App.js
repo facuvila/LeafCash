@@ -108,14 +108,7 @@ function SignupScreen() {
 
     const handleCreateAccount = () => {
         createUserWithEmailAndPassword(auth, email, password)
-        .then((data) => {
-            setDoc(doc(db, "users", data.user.uid), { //IMPORTANTE cambiar construccion de usuario al lado del servidor.
-              email: data.user.email,
-              balance: 100, 
-              plantedTrees: 0,
-              contacts: [],
-              isVendor: false
-            });
+        .then(() => {
             navigation.navigate('Home');
         })
         .catch(error => {
