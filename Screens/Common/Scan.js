@@ -7,7 +7,7 @@ import { Dimensions } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function Scan({}) {
+function Scan() {
     const [hasPermission, setHasPermission] = useState(null);
     const navigation = useNavigation();
 
