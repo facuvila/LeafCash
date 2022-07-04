@@ -1,6 +1,7 @@
 const types = {
     build: 'BUILD',
     updateBalance: 'UPDATEBALANCE',
+    addContact: 'ADDCONTACT'
 }
 
 const initialStore = {
@@ -8,7 +9,7 @@ const initialStore = {
     contacts: [],
     email: '',
     isVendor: false,
-    plantedTrees: 0
+    contributedTrees: 0
 }
 
 const storeReducer = (state, action) => {
@@ -19,13 +20,18 @@ const storeReducer = (state, action) => {
                 contacts: action.user.contacts,
                 email: action.user.email,
                 isVendor: action.user.isVendor,
-                plantedTrees: action.user.plantedTrees
+                contributedTrees: action.user.contributedTrees
             }
-        case types.updateBalance: //Reassigns userData.balance with received value.
+        case types.updateBalance: //Reasigna balance y contributedTrees, a los valores recibidos.
             return {
                 ...state,
                 balance: action.newBalance,
-                plantedTrees: action.newPlantedTrees
+                contributedTrees: action.newContributedTrees
+            }
+        case types.addContact: // Agrega el nuevo contacto al array de contactos.
+            return {
+                ...state,
+                contacts: [...state.contacts, ...action.newContact] //
             }
         default:
             return state;

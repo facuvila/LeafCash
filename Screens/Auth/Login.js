@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-nat
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { initializeApp } from 'firebase/app'
+import { initializeApp } from 'firebase/app';
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { firebaseConfig } from '../../firebase-config';
 

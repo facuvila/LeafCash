@@ -26,9 +26,9 @@ function Confirm({ target, amount }) {
                onPress = {
                     () => {
                         const newBalance = userData.balance - amount;
-                        const newPlantedTrees = userData.plantedTrees + amount / 1000;
+                        const newContributedTrees = userData.contributedTrees + amount / 1000;
                         createTransaction({ uid: target, amount: amount })
-                        dispatch({type: types.updateBalance, newBalance: newBalance, newPlantedTrees: newPlantedTrees})
+                        dispatch({type: types.updateBalance, newBalance: newBalance, newContributedTrees: newContributedTrees})
                         navigation.navigate({ name: 'Home' })
                     }
                }>
