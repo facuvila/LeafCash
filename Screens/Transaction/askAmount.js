@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useStore } from "../../store/StoreProvider";
 
-function Amount({ target }) {
+function Amount({ route }) {
+    const target = route.params?.target;
     const userData = useStore();
     
     const navigation = useNavigation();

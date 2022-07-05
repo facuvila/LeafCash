@@ -40,7 +40,13 @@ function Target() {
                 style={styles.input}
                 placeholder="Destinatario"  
             />
-            {foundUsernames.map(user => <Text key={user.email}>{user.email}</Text>)}
+            {foundUsernames.map((user) => {
+                return (
+                    <Text key={user.email}>
+                        {user.email}
+                    </Text>
+                )
+            })}
             <TouchableOpacity                
                 onPress = {
                     () => navigation.navigate({

@@ -9,7 +9,10 @@ import { firebaseConfig } from '../../firebase-config';
 import { useDispatch, useStore } from "../../store/StoreProvider";
 import { types } from "../../store/StoreReducer";
 
-function Confirm({ target, amount }) {
+function Confirm({ route }) {
+    const target = route.params?.target;
+    const amount = route.params?.amount;
+
     const userData = useStore();
     const dispatch = useDispatch();
 
