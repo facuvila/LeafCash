@@ -33,7 +33,6 @@ function Home() {
         await getUserData({ uid: user.uid })
         .then((result) => {
             dispatch({type: types.build, user: result.data})
-            console.log(result);
         });
         setRefreshing(false);
     }, []);

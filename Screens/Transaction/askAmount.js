@@ -12,7 +12,7 @@ function Amount({ route }) {
     const [amount, setAmount] = useState('');
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>TRANSFIRIENDO A: {target}</Text>
+            <Text>TRANSFIRIENDO A: {target.email}</Text>
             <TextInput
                 keyboardType='numeric'
                 editable
@@ -25,9 +25,8 @@ function Amount({ route }) {
                     () => navigation.navigate({
                         name: 'Confirm',
                         params: { target: target, amount: amount },
-                        merge: true,
                         })
-               }>
+                    }>
                <Text> Siguiente </Text>
             </TouchableOpacity>
         </View>

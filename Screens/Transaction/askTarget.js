@@ -42,21 +42,16 @@ function Target() {
             />
             {foundUsernames.map((user) => {
                 return (
-                    <Text key={user.email}>
-                        {user.email}
-                    </Text>
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate({
+                            name: 'Amount',
+                            params: { target: user },
+                        })
+                    }} style={[styles.button]} key={user.email}>
+                        <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>{user.email}{user.isVendor && "VENDEDOR"}</Text>
+                    </TouchableOpacity>
                 )
             })}
-            <TouchableOpacity                
-                onPress = {
-                    () => navigation.navigate({
-                        name: 'Amount',
-                        params: { target: target },
-                        merge: true,
-                        })
-               } style={[styles.button]}>
-                <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>SIGUIENTE</Text>
-            </TouchableOpacity>
             <Text> o </Text>
             <TouchableOpacity onPress={() => navigation.navigate('Scan')} style={[styles.button]}>
                 <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>LEER QR</Text>

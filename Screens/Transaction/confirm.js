@@ -24,14 +24,14 @@ function Confirm({ route }) {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>TRANSFERIR ${amount} A {target}</Text>
+            <Text>TRANSFERIR ${amount} A {target.email}</Text>
             <TouchableOpacity
                onPress = {
                     () => {
-                        const newBalance = userData.balance - amount;
-                        const newContributedTrees = userData.contributedTrees + amount / 1000;
-                        createTransaction({ uid: target, amount: amount })
-                        dispatch({type: types.updateBalance, newBalance: newBalance, newContributedTrees: newContributedTrees})
+                        createTransaction({ uid: target.uid, amount: amount })
+                        target.isVendor
+                        ? dispatch({type: types.updateBalance, balanceVariation: -amount, contributedTreesVariation: amount/1000})
+                        : dispatch({type: types.updateBalance, balanceVariation: -amount})
                         navigation.navigate({ name: 'Home' })
                     }
                }>
