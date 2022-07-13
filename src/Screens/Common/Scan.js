@@ -4,8 +4,7 @@ import {  BarCodeScanner  } from 'expo-barcode-scanner';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
 
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { firebaseConfig } from '../../firebase-config';
+import { getUserData } from "../../firebaseCalls";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,9 +12,6 @@ const windowHeight = Dimensions.get('window').height;
 function Scan() {
     const [hasPermission, setHasPermission] = useState(null);
     const navigation = useNavigation();
-
-    const functions = getFunctions();
-    const getUserData = httpsCallable(functions, 'getUserData');
 
     // Pide permiso de la cámara
     const askForCameraPermission = () => {
@@ -31,16 +27,14 @@ function Scan() {
 
     // Lo que ocurre al detectar un código QR
     const handleBarCodeScanned = async ({ data }) => {
-        await getUserData({ uid: data })
-        .then((result) => {
-            navigation.navigate({
-                name: 'Amount',
-                params: { target: {
-                    ...result.data,
-                    uid: data
-                } }
-              })
-        });
+        const user = await getUserData(data);
+        navigation.navigate({
+            name: 'Amount',
+            params: { target: {
+                ...user,
+                uid: data
+            } }
+        })
     };
 
     // Devuelve las pantallas en base a los permisos concedidos

@@ -2,10 +2,9 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, Image, RefreshControl, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { initializeApp } from 'firebase/app';
+import { getUserData } from "../../firebaseCalls";
+
 import { getAuth, signOut } from 'firebase/auth';
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { firebaseConfig } from '../../firebase-config';
 
 import { useDispatch, useStore } from "../../store/StoreProvider";
 import { types } from "../../store/StoreReducer";
@@ -17,12 +16,8 @@ function Home() {
     const userData = useStore();
     const dispatch = useDispatch();
     
-    initializeApp(firebaseConfig);
     const auth = getAuth();
     const user = auth.currentUser;
-    const functions = getFunctions();
-
-    const getUserData = httpsCallable(functions, 'getUserData');
 
     const navigation = useNavigation();
 
@@ -30,10 +25,8 @@ function Home() {
 
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
-        await getUserData({ uid: user.uid })
-        .then((result) => {
-            dispatch({type: types.build, user: result.data})
-        });
+        const data = await getUserData(user.uid)
+        dispatch({type: types.build, user: data})
         setRefreshing(false);
     }, []);
 

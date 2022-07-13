@@ -3,8 +3,6 @@ import { View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-nat
 
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { initializeApp } from 'firebase/app'
-import { firebaseConfig } from '../../firebase-config';
 
 import { useDispatch } from "../../store/StoreProvider";
 import { initialStore, types } from '../../store/StoreReducer';
@@ -19,7 +17,6 @@ function Signup() {
     const [repeatedPassword, setRepeatedPassword] = useState('')
     const navigation = useNavigation();
 
-    initializeApp(firebaseConfig);
     const auth = getAuth();
 
     const handleCreateAccount = () => {
@@ -33,7 +30,6 @@ function Signup() {
             navigation.navigate('Home');
         })
         .catch(error => {
-            console.log(error.message);
             Alert.alert(error.message)
         })
     }

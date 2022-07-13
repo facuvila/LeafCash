@@ -3,9 +3,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-nat
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { initializeApp } from 'firebase/app';
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { firebaseConfig } from '../../firebase-config';
+import { getUserData } from "../../firebaseCalls";
 
 import { useDispatch } from "../../store/StoreProvider";
 import { types } from "../../store/StoreReducer";
@@ -14,12 +12,7 @@ import { styles } from '../../styles';
 function Login() {
     const dispatch = useDispatch();
     const navigation = useNavigation();
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const functions = getFunctions();
-
-    const getUserData = httpsCallable(functions, 'getUserData');
+    const auth = getAuth();
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -27,11 +20,11 @@ function Login() {
     const handleSignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
         .then((data) => {
-            getUserData({ uid: data.user.uid })
-            .then((result) => {
-                dispatch({type: types.build, user: result.data});
+            getUserData(data.user.uid)
+            .then((user) => {
+                dispatch({type: types.build, user: user});
+                navigation.navigate('Home');
             });
-            navigation.navigate('Home');
         })
         .catch(error => {
             Alert.alert(error.message);

@@ -2,9 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { initializeApp } from 'firebase/app'
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { firebaseConfig } from '../../firebase-config';
+import { createTransaction } from "../../firebaseCalls";
 
 import { useDispatch, useStore } from "../../store/StoreProvider";
 import { types } from "../../store/StoreReducer";
@@ -17,10 +15,6 @@ function Confirm({ route }) {
     const dispatch = useDispatch();
 
     const navigation = useNavigation();
-    initializeApp(firebaseConfig);
-
-    const functions = getFunctions();
-    const createTransaction = httpsCallable(functions, 'createTransaction');
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -28,7 +22,7 @@ function Confirm({ route }) {
             <TouchableOpacity
                onPress = {
                     () => {
-                        createTransaction({ uid: target.uid, amount: amount })
+                        createTransaction(target.uid, amount)
                         target.isVendor
                         ? dispatch({type: types.updateBalance, balanceVariation: -amount, contributedTreesVariation: amount/1000})
                         : dispatch({type: types.updateBalance, balanceVariation: -amount})
