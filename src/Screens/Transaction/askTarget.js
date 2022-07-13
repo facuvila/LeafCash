@@ -6,38 +6,27 @@ import { alikeUsernames } from "../../firebaseCalls";
 
 import { styles } from '../../styles';
 
+async function checkForUsers (value) {
+    value = value.toLowerCase();
+    return await alikeUsernames(value, 3);
+}
 function Target() {
     const navigation = useNavigation();
     const [foundUsernames, setFoundUsernames] = useState([]);
-    const [input, setInput] = useState('');
-
-
-    function debounce(func, timeout = 300){
-        let timer;
-        return (...args) => {
-          clearTimeout(timer);
-          timer = setTimeout(() => { func.apply(this, args); }, timeout);
-        };
-    }
-
-    async function saveInput(email){
-        console.log('test')
-        setFoundUsernames(await alikeUsernames(email, 3));
-    }
-
-    function processChange(value) {
-        setInput(value);
-        console.log(input);
-        debounce(() => saveInput(input));
-    }
-
+    
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Ingresa el destinatario:</Text>
             <TextInput
                 editable
                 maxLength={40}
-                onChangeText = {(value) => processChange(value)}
+                onChangeText = {async (value) => {
+                    if(value.length > 3) {
+                        setFoundUsernames(await checkForUsers(value));
+                    } else {
+                        setFoundUsernames([]);
+                    }
+                }}
                 style={styles.input}
                 placeholder="Destinatario"  
             />
