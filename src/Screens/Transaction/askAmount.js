@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useStore } from "../../store/StoreProvider";
+import MoneyInput from 'react-native-money-input'
 
 function Amount({ route }) {
     const target = route.params?.target;
@@ -13,12 +14,7 @@ function Amount({ route }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>TRANSFIRIENDO A: {target.email}</Text>
-            <TextInput
-                keyboardType='numeric'
-                editable
-                maxLength={10}
-                onChangeText = {(value) => setAmount(value)}
-            />
+            <MoneyInput onChangeText={(value) => setAmount(value)} autoFocus={true} style={styles.moneyInput} />
             {amount > userData.balance ? <Text>Balance insuficiente!</Text> : null}
             <TouchableOpacity
                onPress = {
@@ -34,3 +30,12 @@ function Amount({ route }) {
 };
 
 export default Amount;
+
+const styles = StyleSheet.create({
+    moneyInput: {
+        fontSize: 74,
+        fontWeight: 'bold',
+        color: 'black',
+        borderWidth: 0
+    }
+})

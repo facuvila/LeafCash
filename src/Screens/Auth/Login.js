@@ -37,11 +37,11 @@ function Login() {
         <View style={styles.login}>
             <View>
                 <Text style={{fontSize: 17, fontWeight: '400', color: '#000'}}>Correo electrónico</Text>
-                <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder="leafcash@email.com" />
+                <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder="leafcash@email.com" placeholderTextColor="#8f8f8f" />
             </View>
             <View>
                 <Text style={{fontSize: 17, fontWeight: '400', color: '#000'}}>Contraseña</Text>
-                <TextInput onChangeText={(text) => setPassword(text)} style={styles.input} placeholder="********" secureTextEntry={true}/>
+                <TextInput onChangeText={(text) => setPassword(text)} style={styles.input} placeholder="********" placeholderTextColor="#8f8f8f" secureTextEntry={true}/>
             </View>
             <TouchableOpacity onPress={handleSignIn} style={[styles.button]}>
                 <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>INGRESAR</Text>

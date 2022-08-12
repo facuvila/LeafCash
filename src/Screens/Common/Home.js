@@ -9,7 +9,6 @@ import { getAuth, signOut } from 'firebase/auth';
 import { useDispatch, useStore } from "../../store/StoreProvider";
 import { types } from "../../store/StoreReducer";
 
-import { LeafBtn } from '../../Components/leafBtn';
 import { styles } from '../../styles';
 
 function Home() {

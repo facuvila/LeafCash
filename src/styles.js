@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
       padding: 10,
       marginVertical: 10,
       backgroundColor: '#fff',
-      marginBottom: 20
+      marginBottom: 20,
     },
     button: {
       width: 250,
@@ -44,5 +44,11 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       marginVertical: 10,
       backgroundColor: '#046E19'
+    },
+    balance: {
+      fontSize: 74,
+      fontWeight: 'bold',
+      color: 'black',
+      borderWidth: 0
     }
   });
