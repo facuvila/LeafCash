@@ -1,7 +1,8 @@
 const types = {
     build: 'BUILD',
     updateBalance: 'UPDATEBALANCE',
-    addContact: 'ADDCONTACT'
+    addContact: 'ADDCONTACT',
+    addContact: 'ADDTRANSACTION'
 }
 
 const initialStore = {
@@ -9,7 +10,8 @@ const initialStore = {
     contacts: [],
     email: '',
     isVendor: false,
-    contributedTrees: 0
+    contributedTrees: 0,
+    lastTransactions: []
 }
 
 const storeReducer = (state, action) => {
@@ -20,7 +22,8 @@ const storeReducer = (state, action) => {
                 contacts: action.user.contacts,
                 email: action.user.email,
                 isVendor: action.user.isVendor,
-                contributedTrees: action.user.contributedTrees
+                contributedTrees: action.user.contributedTrees,
+                lastTransactions: action.user.lastTransactions
             }
         case types.updateBalance: //Reasigna balance y contributedTrees, a los valores recibidos.
             action.contributedTreesVariation = action.contributedTreesVariation ?? 0;
@@ -33,6 +36,12 @@ const storeReducer = (state, action) => {
             return {
                 ...state,
                 contacts: [...state.contacts, ...action.newContact] //
+            }
+        case types.addTransactions:
+            let lastTransactions = [action.transaction, state.lastTransactions[0], state.lastTransactions[1]];
+            return {
+                ...state,
+                lastTransactions: lastTransactions
             }
         default:
             return state;

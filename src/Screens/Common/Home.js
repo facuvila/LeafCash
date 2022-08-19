@@ -10,6 +10,8 @@ import { useDispatch, useStore } from "../../store/StoreProvider";
 import { types } from "../../store/StoreReducer";
 
 import { styles } from '../../styles';
+import Transaction from '../../Components/Transaction';
+import { FlatList } from 'native-base';
 
 function Home() {
     const userData = useStore();
@@ -29,6 +31,10 @@ function Home() {
         setRefreshing(false);
     }, []);
 
+    const renderItem = ({ item }) => (
+        <Transaction data={item}/>
+    );
+
     return (
         <ScrollView
             refreshControl={
@@ -43,14 +49,23 @@ function Home() {
                     <>
                         <Image source={require("../../Assets/LeafLogo.png")} style={styles.leafLogo}/>
                         <Text>{userData.email}</Text>
-                        <Text>${userData.balance}</Text>
+                        <Text>${userData.balance.toFixed(2)}</Text>
                         <Text>Árboles plantados: {userData.contributedTrees}</Text><Text></Text>
-                        <TouchableOpacity onPress={() => navigation.navigate('Target')} style={[styles.button]}>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Target') }} style={[styles.button]}>
                             <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>ENVIAR</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('QR')} style={[styles.button]}>
                             <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>RECIBIR - QR</Text>
                         </TouchableOpacity>
+                        <Text>Tus últimas transacciones: </Text>
+                        <FlatList
+                            data={userData.lastTransactions}
+                            renderItem={renderItem}
+                            keyExtractor={item => {
+                                if(item.id) return item.id
+                                return 0;
+                            }}
+                        />
                         <TouchableOpacity
                             onPress={() => {
                                 signOut(auth).then(() => {

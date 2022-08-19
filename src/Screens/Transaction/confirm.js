@@ -21,11 +21,12 @@ function Confirm({ route }) {
             <Text>TRANSFERIR ${amount} A {target.email}</Text>
             <TouchableOpacity
                onPress = {
-                    () => {
+                    async () => {
                         createTransaction(target.uid, amount)
                         target.isVendor
                         ? dispatch({type: types.updateBalance, balanceVariation: -amount, contributedTreesVariation: amount/1000})
                         : dispatch({type: types.updateBalance, balanceVariation: -amount})
+                        await dispatch({type: types.addTransaction, transaction: {amount: amount, commited: null, fee: amount * 0.02, idTarget: target.uid, treeAmount: amount / 1000}})
                         navigation.navigate({ name: 'Home' })
                     }
                }>
