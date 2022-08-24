@@ -18,7 +18,8 @@ async function getUserData(uid) {
 
 //createTransaction will receive target's uid and transaction amount, and call CreateTransaction.
 async function createTransaction(target, amount) {
-    CreateTransaction({ uid: target, amount: amount })
+    const data = await CreateTransaction({ uid: target, amount: amount })
+    return data;
 }
 
 async function alikeUsernames(emailStr, limit){

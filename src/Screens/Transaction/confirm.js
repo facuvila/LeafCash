@@ -6,7 +6,6 @@ import { createTransaction } from "../../firebaseCalls";
 
 import { useDispatch, useStore } from "../../store/StoreProvider";
 import { types } from "../../store/StoreReducer";
-
 function Confirm({ route }) {
     const target = route.params?.target;
     const amount = route.params?.amount;
@@ -22,11 +21,11 @@ function Confirm({ route }) {
             <TouchableOpacity
                onPress = {
                     async () => {
-                        createTransaction(target.uid, amount)
+                        const transaction = await createTransaction(target.uid, amount)
                         target.isVendor
                         ? dispatch({type: types.updateBalance, balanceVariation: -amount, contributedTreesVariation: amount/1000})
                         : dispatch({type: types.updateBalance, balanceVariation: -amount})
-                        await dispatch({type: types.addTransaction, transaction: {amount: amount, commited: null, fee: amount * 0.02, idTarget: target.uid, treeAmount: amount / 1000}})
+                        await dispatch({type: types.addTransaction, transaction: transaction.data.data})
                         navigation.navigate({ name: 'Home' })
                     }
                }>
