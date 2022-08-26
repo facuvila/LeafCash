@@ -12,6 +12,7 @@ import Confirm from './Screens/Transaction/confirm';
 import Login from './Screens/Auth/Login';
 import Signup from './Screens/Auth/Signup';
 import QR from './Screens/Common/QR';
+import Plant from './Screens/Common/Plant';
 
 import StoreProvider from './store/StoreProvider';
 
@@ -31,6 +32,7 @@ export default function App() {
                         <Stack.Screen name="Amount" component={Amount} />
                         <Stack.Screen name="Confirm" component={Confirm} />
                         <Stack.Screen name="QR" component={QR} />
+                        <Stack.Screen name="Plant" component={Plant} />
                     </Stack.Navigator>
                 </NavigationContainer> 
             </StoreProvider>

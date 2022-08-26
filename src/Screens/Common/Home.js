@@ -57,6 +57,9 @@ function Home() {
                         <TouchableOpacity onPress={() => navigation.navigate('QR')} style={[styles.button]}>
                             <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>RECIBIR - QR</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('Plant')} style={[styles.button]}>
+                            <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>PLANTAR</Text>
+                        </TouchableOpacity>
                         <Text>Tus últimas transacciones: </Text>
                         <FlatList
                             data={userData.lastTransactions}

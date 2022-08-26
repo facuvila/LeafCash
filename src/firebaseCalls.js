@@ -7,6 +7,8 @@ const functions = getFunctions();
 const GetUserData = httpsCallable(functions, 'getUserData');
 const CreateTransaction = httpsCallable(functions, 'createTransaction');
 const AlikeUsernames = httpsCallable(functions, 'alikeUsernames');
+const PlantationEvent = httpsCallable(functions, 'plantationEvent');
+
 
 //getUserData will receive an UID and return its retrieved data.
 async function getUserData(uid) {
@@ -29,4 +31,11 @@ async function alikeUsernames(emailStr, limit){
     });
 }
 
-export { getUserData, createTransaction, alikeUsernames }
+async function plantationEvent(location, plantedTrees){
+    return await PlantationEvent({ location: location, plantedTrees: plantedTrees })
+    .then((result) => {
+        return result.data;
+    });
+}
+
+export { getUserData, createTransaction, alikeUsernames, plantationEvent }
