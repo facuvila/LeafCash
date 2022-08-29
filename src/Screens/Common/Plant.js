@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from '../../styles';
 import { plantationEvent } from "../../firebaseCalls";
 
-import { Radio } from 'native-base';
+import { Box, CheckIcon, Radio, Select } from 'native-base';
 
 function Plant() {
     const [location, setLocation] = useState("");
@@ -21,28 +21,19 @@ function Plant() {
         >
             <Text>Plantar árboles</Text>
             <Text>Ubicación:</Text>
-            <Radio.Group name="locationRadio" accessibilityLabel="plantation location" value={location} onChange={nextLocation => {
-                setLocation(nextLocation);
-            }}>
-                <Radio value="northamerica" my={1}>
-                    Norteamérica
-                </Radio>
-                <Radio value="southamerica" my={1}>
-                    Sudamérica
-                </Radio>
-                <Radio value="europe" my={1}>
-                    Europa
-                </Radio>
-                <Radio value="asia" my={1}>
-                    Asia
-                </Radio>
-                <Radio value="africa" my={1}>
-                    África
-                </Radio>
-                <Radio value="oceania" my={1}>
-                    Oceania
-                </Radio>
-            </Radio.Group>
+            <Box w="3/4" maxW="300">
+                <Select selectedValue={location} minWidth="200" accessibilityLabel="Seleccionar región" placeholder="Seleccionar región" _selectedItem={{
+                bg: "teal.600",
+                endIcon: <CheckIcon size="5" />
+                }} mt={1} onValueChange={location => setLocation(location)}>
+                    <Select.Item label="Norteamérica" value="northamerica" />
+                    <Select.Item label="Sudamérica" value="southamerica" />
+                    <Select.Item label="Europa" value="europe" />
+                    <Select.Item label="Asia" value="asia" />
+                    <Select.Item label="Africa" value="africa" />
+                    <Select.Item label="Oceania" value="oceania" />
+                </Select>
+            </Box>
             <Text>Árboles plantados:</Text>
             <TextInput
                 editable

@@ -11,7 +11,9 @@ import { types } from "../../store/StoreReducer";
 
 import { styles } from '../../styles';
 import Transaction from '../../Components/Transaction';
-import { FlatList } from 'native-base';
+import HomeInfo from '../../Components/HomeInfo';
+import { Avatar, FlatList, HStack } from 'native-base';
+import { normalizeEmail } from '../../helpers';
 
 function Home() {
     const userData = useStore();
@@ -47,16 +49,20 @@ function Home() {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 {!userData.email ? <Text>CARGANDO LEAF...</Text> : 
                     <>
-                        <Image source={require("../../Assets/LeafLogo.png")} style={styles.leafLogo}/>
-                        <Text>{userData.email}</Text>
-                        <Text>${userData.balance.toFixed(2)}</Text>
-                        <Text>Árboles plantados: {userData.contributedTrees.total}</Text><Text></Text>
-                        <TouchableOpacity onPress={() => { navigation.navigate('Target') }} style={[styles.button]}>
-                            <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>ENVIAR</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('QR')} style={[styles.button]}>
-                            <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>RECIBIR - QR</Text>
-                        </TouchableOpacity>
+                        <HStack space={2}>
+                            <Avatar source={require("../../Assets/avatars/2.png")}></Avatar>
+                            <Avatar source={require("../../Assets/Logout.png")}></Avatar>
+                        </HStack>
+                        <Text>Bienvenido, {normalizeEmail(userData.email)}! </Text>
+                        <HomeInfo/>
+                        <HStack space={2}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Target') }} style={[styles.button]}>
+                                <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>ENVIAR</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('QR')} style={[styles.button]}>
+                                <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>RECIBIR</Text>
+                            </TouchableOpacity>
+                        </HStack>
                         <TouchableOpacity onPress={() => navigation.navigate('Plant')} style={[styles.button]}>
                             <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>PLANTAR</Text>
                         </TouchableOpacity>
@@ -65,7 +71,7 @@ function Home() {
                             data={userData.lastTransactions}
                             renderItem={renderItem}
                             keyExtractor={item => {
-                                if(item.id) {return item.id} 
+                                if(item?.id) {return item.id} 
                                 return Math.random() * 10000;
                             }}
                         />

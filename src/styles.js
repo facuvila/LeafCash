@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
       marginBottom: 20,
     },
     button: {
-      width: 250,
+      width: windowWidth * 0.45,
       height: 40,
       borderRadius: 4,
       alignItems: 'center',
