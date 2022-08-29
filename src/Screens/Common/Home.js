@@ -50,7 +50,7 @@ function Home() {
                         <Image source={require("../../Assets/LeafLogo.png")} style={styles.leafLogo}/>
                         <Text>{userData.email}</Text>
                         <Text>${userData.balance.toFixed(2)}</Text>
-                        <Text>Árboles plantados: {userData.contributedTrees}</Text><Text></Text>
+                        <Text>Árboles plantados: {userData.contributedTrees.total}</Text><Text></Text>
                         <TouchableOpacity onPress={() => { navigation.navigate('Target') }} style={[styles.button]}>
                             <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>ENVIAR</Text>
                         </TouchableOpacity>
@@ -65,8 +65,8 @@ function Home() {
                             data={userData.lastTransactions}
                             renderItem={renderItem}
                             keyExtractor={item => {
-                                if(item.id) return item.id
-                                return 0;
+                                if(item.id) {return item.id} 
+                                return Math.random() * 10000;
                             }}
                         />
                         <TouchableOpacity
