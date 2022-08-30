@@ -3,8 +3,10 @@ import { View, Text, TextInput, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { alikeUsernames } from "../../firebaseCalls";
+import UsersList from '../../Components/UsersList.js';
 
 import { styles } from '../../styles';
+import { normalizeEmail } from '../../helpers';
 
 async function checkForUsers (value) {
     value = value.toLowerCase();
@@ -30,18 +32,7 @@ function Target() {
                 style={styles.input}
                 placeholder="Destinatario"  
             />
-            {foundUsernames.map((user) => {
-                return (
-                    <TouchableOpacity onPress={() => {
-                        navigation.navigate({
-                            name: 'Amount',
-                            params: { target: user },
-                        })
-                    }} style={[styles.button]} key={user.email}>
-                        <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>{user.email}{user.isVendor && "VENDEDOR"}</Text>
-                    </TouchableOpacity>
-                )
-            })}
+            <UsersList data={foundUsernames}/>
             <Text> o </Text>
             <TouchableOpacity onPress={() => navigation.navigate('Scan')} style={[styles.button]}>
                 <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>LEER QR</Text>

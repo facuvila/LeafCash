@@ -30,7 +30,10 @@ const storeReducer = (state, action) => {
             return {
                 ...state,
                 balance: state.balance + action.balanceVariation,
-                contributedTrees: state.contributedTrees + action.contributedTreesVariation
+                contributedTrees: {
+                    ...state.contributedTrees,
+                    total: state.contributedTrees.total + action.contributedTreesVariation
+                } 
             }
         case types.addContact: // Agrega el nuevo contacto al array de contactos.
             return {
