@@ -63,9 +63,6 @@ function Home() {
                                 <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>RECIBIR</Text>
                             </TouchableOpacity>
                         </HStack>
-                        <TouchableOpacity onPress={() => navigation.navigate('Plant')} style={[styles.button]}>
-                            <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>PLANTAR</Text>
-                        </TouchableOpacity>
                         <Text>Tus últimas transacciones: </Text>
                         <FlatList
                             data={userData.lastTransactions}
@@ -75,16 +72,21 @@ function Home() {
                                 return Math.random() * 10000;
                             }}
                         />
-                        <TouchableOpacity
+                        <HStack space={2}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Plant')} style={[styles.button]}>
+                                <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>PLANTAR</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
                             onPress={() => {
                                 signOut(auth).then(() => {
                                     navigation.navigate('Login');
                                 })
                             }}
                             style={[styles.button]}
-                        >
+                            >
                             <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>CERRAR SESION</Text>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+                        </HStack>
                     </>
                 }
             </View>
