@@ -22,7 +22,8 @@ function Amount({ route }) {
                         name: 'Confirm',
                         params: { target: target, amount: amount },
                         })
-                    }>
+                    }
+                disabled={amount > userData.balance}>
                <Text> Siguiente </Text>
             </TouchableOpacity>
         </View>
