@@ -16,7 +16,7 @@ function Plant() {
         <View
             style={{
             flexDirection: "column",
-            padding: 150
+            padding: 80
             }}
         >
             <Text>Plantar árboles</Text>
@@ -38,12 +38,16 @@ function Plant() {
             <TextInput
                 editable
                 maxLength={40}
-                onChangeText = {(value) => {setPlantedTrees(value)}}
+                onChangeText = {(value) => {
+
+                    setPlantedTrees(value)
+                }}
                 placeholder="Ubicación"
                 style={styles.input}
                 keyboardType="numeric"
             />
             <TouchableOpacity
+                disabled={!location || !plantedTrees}
                onPress = {
                     () => {
                         plantationEvent(location, plantedTrees)

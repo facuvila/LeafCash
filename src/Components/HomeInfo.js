@@ -17,15 +17,10 @@ export default function HomeInfo() {
             <Heading size="md" ml="-1">
               ${userData.balance.toFixed(2)}
             </Heading>
-            <Text fontSize="xs" _light={{
-            color: "green.500"
-            }} 
-            fontWeight="500" ml="-0.5" mt="-1">
-              asd
-            </Text>
           </Stack>
           <Stack space={2}>
-            <Text>Árboles plantados: {userData.contributedTrees.total}</Text>
+            <Text>Árboles aportados: {userData.contributedTrees.total}</Text>
+            <Text>Árboles plantados: {userData.contributedTrees.africa + userData.contributedTrees.asia + userData.contributedTrees.europe + userData.contributedTrees.northamerica + userData.contributedTrees.oceania + userData.contributedTrees.southamerica}</Text>
           </Stack>
         </Stack>
       </Box>

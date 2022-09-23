@@ -49,13 +49,9 @@ function Home() {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 {!userData.email ? <Text>CARGANDO LEAF...</Text> : 
                     <>
-                        <HStack space={2}>
-                            <Avatar source={require("../../Assets/avatars/2.png")}></Avatar>
-                            <Avatar source={require("../../Assets/Logout.png")}></Avatar>
-                        </HStack>
-                        <Text>Bienvenido, {normalizeEmail(userData.email)}! </Text>
+                        <Text style={{paddingTop: 100, fontWeight: 'bold'}}>Bienvenido, {normalizeEmail(userData.email)}! </Text>
                         <HomeInfo/>
-                        <HStack space={2}>
+                        <HStack space={2} style={{paddingTop: 30}}>
                             <TouchableOpacity onPress={() => { navigation.navigate('Target') }} style={[styles.button]}>
                                 <Text style={{fontSize: 17, fontWeight: '600', color: 'white'}}>ENVIAR</Text>
                             </TouchableOpacity>

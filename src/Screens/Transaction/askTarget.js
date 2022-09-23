@@ -13,6 +13,7 @@ async function checkForUsers (value) {
     value = value.toLowerCase();
     return await alikeUsernames(value, 3);
 }
+
 function Target() {
     const navigation = useNavigation();
     const [foundUsernames, setFoundUsernames] = useState([]);
@@ -27,14 +28,6 @@ function Target() {
                 onChangeText = {async (value) => {
                     if(value.length > 2) {
                         setFoundUsernames(await checkForUsers(value));
-                        console.log(foundUsernames)
-                        const i = foundUsernames.findIndex(e => e.uid === user.uid);
-                        console.log(i)
-                        if (i > -1) {
-                            let aux = foundUsernames;
-                            aux.splice(i, 1);
-                            setFoundUsernames(aux)
-                        }
                     } else {
                         setFoundUsernames([]);
                     }
